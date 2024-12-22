@@ -31,11 +31,8 @@ const Header: React.FC = () => {
 
       {/* Right Section (Reserve Button and Cart Icon) */}
       <div className="hidden md:flex items-center space-x-6">
-        <button className="px-6 py-2 border rounded-full text-gray-800 border-gray-300 hover:bg-gray-200">
-          Reserve
-        </button>
         <div className="relative">
-          <Image src="/cart-icon.png" alt="Cart" width={24} height={24} className="cursor-pointer" />
+          <Image src="/cart-icon.png" alt="Cart" width={24} height={24}  className="cursor-pointer" />
           <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
             2
           </span>

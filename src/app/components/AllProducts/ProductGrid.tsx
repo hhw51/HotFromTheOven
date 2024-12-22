@@ -3,10 +3,10 @@ import ProductCard from './ProductCard';
 
 const ProductGrid: React.FC = () => {
   const products = [
-    { image: '/brioche.jpg', name: 'Brioche', price: '24' },
-    { image: '/cookies.jpg', name: 'Cookies', price: '38' },
-    { image: '/sandwich.jpg', name: 'Sandwich', price: '56' },
-    { image: '/pancake.jpg', name: 'Pancake', price: '62' },
+    { image: '/lasagna.jpg', name: 'Lasagna Rolls', price: '1500' },
+    { image: '/brownies.jpg', name: 'Brownies', price: '500' },
+    { image: '/mac.jpg', name: 'Mac n Cheese', price: '56' },
+    { image: '/pasta.jpg', name: 'Red Sauce Pasta', price: '62' },
   ];
 
   return (
