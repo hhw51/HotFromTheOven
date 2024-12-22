@@ -32,6 +32,7 @@ const Header: React.FC = () => {
         <Link href="/products" className="hover:text-orange-500">Products</Link>
     <Link href="/shop" className="hover:text-orange-500">Shop</Link>
         <Link href="/contact" className="hover:text-orange-500">Contact</Link>
+        <Link href="/reviews" className="hover:text-orange-500">Reviews</Link>
       </nav>
 
       {/* Right Section (Reserve Button and Cart Icon) */}
@@ -111,6 +112,10 @@ const Header: React.FC = () => {
           <Link href="/contact" className="block text-gray-800 hover:text-orange-500">
             Contact
           </Link>
+          <Link href="/reviews" className="block text-gray-800 hover:text-orange-500">
+            Reviews
+          </Link>
+          
         </nav>
       </div>
 

@@ -7,6 +7,7 @@ const NavMenu: React.FC = () => {
     { name: 'Products', link: '/products' },
     { name: 'Services', link: '/services' },
     { name: 'Contact', link: '/contact' },
+    { name: 'Reviews', link: '/reviews' },
   ];
 
   return (
