@@ -10,9 +10,14 @@ const LasagnaRollsPage: React.FC = () => {
     quantity: 1,
     specialInstructions: "",
     size: "Regular",
-    phone: "",
+    phone: "+92",
     email: "",
     address: "",
+  });
+
+  const [errors, setErrors] = useState({
+    phone: false,
+    email: false,
   });
 
   // Load data from localStorage on component mount
@@ -22,7 +27,7 @@ const LasagnaRollsPage: React.FC = () => {
       const parsedData = JSON.parse(savedData);
       setFormData((prev) => ({
         ...prev,
-        phone: parsedData.phone || "",
+        phone: parsedData.phone || "+92",
         email: parsedData.email || "",
         address: parsedData.address || "",
       }));
@@ -33,11 +38,46 @@ const LasagnaRollsPage: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
+
+    if (name === "phone") {
+      // Restrict input to 10 digits after +92
+      if (value.length > 13) return; // `+92` + 10 digits = 13 characters
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const validateForm = (): boolean => {
+    let isValid = true;
+
+    // Phone validation
+    if (formData.phone.length !== 13 || !/^\+92\d{10}$/.test(formData.phone)) {
+      setErrors((prev) => ({ ...prev, phone: true }));
+      isValid = false;
+    } else {
+      setErrors((prev) => ({ ...prev, phone: false }));
+    }
+
+    // Email validation
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.email)) {
+      setErrors((prev) => ({ ...prev, email: true }));
+      isValid = false;
+    } else {
+      setErrors((prev) => ({ ...prev, email: false }));
+    }
+
+    return isValid;
   };
 
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault(); // Prevent default form submission behavior
+
+    if (!validateForm()) {
+      toast.error("Please fix the errors before placing your order.", {
+        position: "top-center",
+      });
+      return;
+    }
 
     // Save phone, email, and address to localStorage
     const { phone, email, address } = formData;
@@ -115,21 +155,42 @@ const LasagnaRollsPage: React.FC = () => {
           </div>
 
           {/* Phone Number */}
-          <div>
-            <label htmlFor="phone" className="block font-semibold mb-2">
-              Phone Number
-            </label>
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="Enter your phone number"
-              className="border border-gray-300 rounded-lg p-2 w-full"
-              required
-            />
-          </div>
+{/* Phone Number */}
+<div>
+  <label htmlFor="phone" className="block font-semibold mb-2">
+    Phone Number
+  </label>
+  <div className="flex items-center border rounded-lg p-2 w-full">
+    {/* Non-editable +92 prefix */}
+    <span className="bg-gray-100 text-gray-700 px-3 py-2 rounded-l-lg border-r border-gray-300">
+      +92
+    </span>
+    {/* Input for 10-digit number */}
+    <input
+      type="text"
+      id="phone"
+      name="phone"
+      value={formData.phone.slice(3)} // Display only the 10 digits after +92
+      onChange={(e) => {
+        const input = e.target.value.replace(/\D/g, ""); // Remove non-digit characters
+        if (input.length <= 10) {
+          setFormData((prev) => ({ ...prev, phone: "+92" + input }));
+        }
+      }}
+      placeholder="Enter your phone number"
+      className={`flex-1 p-2 border-none focus:ring-0 ${
+        errors.phone ? "ring-red-500 focus:ring-red-500" : ""
+      }`}
+      required
+    />
+  </div>
+  {errors.phone && (
+    <p className="text-red-500 text-sm mt-1">
+      Phone number must be 10 digits after +92.
+    </p>
+  )}
+</div>
+
 
           {/* Email Address */}
           <div>
@@ -143,9 +204,16 @@ const LasagnaRollsPage: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter your email address"
-              className="border border-gray-300 rounded-lg p-2 w-full"
+              className={`border rounded-lg p-2 w-full ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              }`}
               required
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                Please enter a valid email address.
+              </p>
+            )}
           </div>
 
           {/* Address */}
