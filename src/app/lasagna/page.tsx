@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OrderButton from "../components/AllProducts/OrderButton";
@@ -10,7 +10,24 @@ const LasagnaRollsPage: React.FC = () => {
     quantity: 1,
     specialInstructions: "",
     size: "Regular",
+    phone: "",
+    email: "",
+    address: "",
   });
+
+  // Load data from localStorage on component mount
+  useEffect(() => {
+    const savedData = localStorage.getItem("lasagnaOrder");
+    if (savedData) {
+      const parsedData = JSON.parse(savedData);
+      setFormData((prev) => ({
+        ...prev,
+        phone: parsedData.phone || "",
+        email: parsedData.email || "",
+        address: parsedData.address || "",
+      }));
+    }
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -21,9 +38,20 @@ const LasagnaRollsPage: React.FC = () => {
 
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault(); // Prevent default form submission behavior
+
+    // Save phone, email, and address to localStorage
+    const { phone, email, address } = formData;
+    localStorage.setItem(
+      "lasagnaOrder",
+      JSON.stringify({ phone, email, address })
+    );
+
     toast.success(`Order placed successfully!`, {
       position: "top-center",
     });
+
+    // Log order details or send to backend here
+    console.log("Order details:", formData);
   };
 
   return (
@@ -48,6 +76,7 @@ const LasagnaRollsPage: React.FC = () => {
               value={formData.quantity}
               onChange={handleChange}
               className="border border-gray-300 rounded-lg p-2 w-full"
+              required
             />
           </div>
 
@@ -82,6 +111,57 @@ const LasagnaRollsPage: React.FC = () => {
               placeholder="e.g., No cheese, extra sauce, etc."
               className="border border-gray-300 rounded-lg p-2 w-full"
               rows={3}
+            ></textarea>
+          </div>
+
+          {/* Phone Number */}
+          <div>
+            <label htmlFor="phone" className="block font-semibold mb-2">
+              Phone Number
+            </label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="Enter your phone number"
+              className="border border-gray-300 rounded-lg p-2 w-full"
+              required
+            />
+          </div>
+
+          {/* Email Address */}
+          <div>
+            <label htmlFor="email" className="block font-semibold mb-2">
+              Email Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email address"
+              className="border border-gray-300 rounded-lg p-2 w-full"
+              required
+            />
+          </div>
+
+          {/* Address */}
+          <div>
+            <label htmlFor="address" className="block font-semibold mb-2">
+              Address
+            </label>
+            <textarea
+              id="address"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              placeholder="Enter your address"
+              className="border border-gray-300 rounded-lg p-2 w-full"
+              rows={3}
+              required
             ></textarea>
           </div>
 
