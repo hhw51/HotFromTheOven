@@ -16,14 +16,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, name, price }) => {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full sm:w-[300px] md:w-[350px] mx-auto">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden">
       {/* Image Section */}
-      <div className="w-full h-[200px] sm:h-[220px] md:h-[250px] relative cursor-pointer" onClick={toggleModal}>
+      <div
+        className="cursor-pointer w-full h-48 relative"
+        onClick={toggleModal}
+      >
         <Image
           src={image}
           alt={name}
           layout="fill"
           objectFit="cover"
+          className="w-full h-48 object-cover"
         />
       </div>
 

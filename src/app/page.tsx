@@ -9,7 +9,7 @@ export default function Home() {
     <div>
       <Header />
       <Hero />
-      <div className="mx-auto max-w-screen-lg px-6">
+      <div className="mx-auto max-w-screen-xl px-6 lg:px-12">
         <SectionTitle />
         <ProductGrid />
         <CatalogButton />
@@ -17,3 +17,4 @@ export default function Home() {
     </div>
   );
 }
+
