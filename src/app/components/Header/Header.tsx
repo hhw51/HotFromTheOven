@@ -14,8 +14,14 @@ const Header: React.FC = () => {
     <header className="flex items-center justify-between px-8 py-4 bg-white shadow-md fixed w-full z-50">
       {/* Left Section (Logo) */}
       <div>
-        <Link href="/">
-          <h1 className="text-xl font-bold">Bakery</h1>
+      <Link href="https://www.instagram.com/hot.fromtheoven/" target="_blank" rel="noopener noreferrer">
+          <Image
+            src="/insta.jpg" 
+            alt="Instagram Logo"
+            width={40} // Set the width of the logo
+            height={40} // Set the height of the logo
+            className="cursor-pointer"
+          />
         </Link>
       </div>
 
@@ -24,8 +30,7 @@ const Header: React.FC = () => {
         <Link href="/" className="hover:text-orange-500">Home</Link>
         <Link href="/about" className="hover:text-orange-500">About</Link>
         <Link href="/products" className="hover:text-orange-500">Products</Link>
-        <Link href="/pages" className="hover:text-orange-500">Instagram</Link>
-        <Link href="/shop" className="hover:text-orange-500">Shop</Link>
+    <Link href="/shop" className="hover:text-orange-500">Shop</Link>
         <Link href="/contact" className="hover:text-orange-500">Contact</Link>
       </nav>
 
@@ -98,9 +103,8 @@ const Header: React.FC = () => {
           <Link href="/products" className="block text-gray-800 hover:text-orange-500">
             Products
           </Link>
-          <Link href="/pages" className="block text-gray-800 hover:text-orange-500">
-            Instagram
-          </Link>
+          
+
           <Link href="/shop" className="block text-gray-800 hover:text-orange-500">
             Shop
           </Link>
