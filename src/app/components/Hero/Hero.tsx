@@ -3,7 +3,7 @@ import React from 'react';
 const Hero: React.FC = () => {
   return (
     <div
-      className="relative w-full bg-cover bg-center h-[100vh]" // Increased height to full viewport
+      className="relative w-full bg-cover bg-center h-[70vh]" // Increased height to 70% of viewport height
       style={{ backgroundImage: "url('/hero-image.jpg')" }}
     >
       {/* Overlay */}
@@ -13,7 +13,7 @@ const Hero: React.FC = () => {
       <div className="relative z-10 mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center">
         <div className="text-center">
           {/* Adjusted spacing for "Hot From The Oven" */}
-          <h2 className="text-lg font-semibold text-white uppercase tracking-wide mb-4">
+          <h2 className="text-lg font-semibold text-white uppercase tracking-wide mb-6">
             Hot From The Oven
           </h2>
           {/* Main heading */}
