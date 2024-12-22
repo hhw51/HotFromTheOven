@@ -16,9 +16,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, name, price }) => {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden w-[350px]">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full sm:w-[300px] md:w-[350px] mx-auto">
       {/* Image Section */}
-      <div className="w-full h-[250px] relative cursor-pointer" onClick={toggleModal}>
+      <div className="w-full h-[200px] sm:h-[220px] md:h-[250px] relative cursor-pointer" onClick={toggleModal}>
         <Image
           src={image}
           alt={name}
@@ -28,9 +28,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, name, price }) => {
       </div>
 
       {/* Product Info Section */}
-      <div className="p-6 text-center">
-        <h3 className="text-xl font-semibold">{name}</h3>
-        <p className="text-orange-500 text-2xl mt-4">PKR {price}</p>
+      <div className="p-4 text-center">
+        <h3 className="text-lg font-semibold">{name}</h3>
+        <p className="text-orange-500 text-xl mt-2">PKR {price}</p>
       </div>
 
       {/* Modal for Full-Size Image */}
@@ -44,8 +44,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, name, price }) => {
               src={image}
               alt={name}
               layout="responsive"
-              width={600} // Adjust width dynamically
-              height={600} // Adjust height dynamically
+              width={600}
+              height={600}
               className="rounded-lg"
             />
             <button
