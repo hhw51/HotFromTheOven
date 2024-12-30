@@ -1,11 +1,18 @@
-import React from 'react'
+// src/app/red-sauce-pasta/page.tsx
+"use client";
 
-const Pasta = () => {
+import React from "react";
+import ProductForm from "../components/ProductForm";
+
+const RedSaucePastaPage: React.FC = () => {
   return (
-    <div>
-      HII
-    </div>
-  )
-}
+    <ProductForm
+      product="Red Sauce Pasta"
+      price={7.50}
+      image="/images/red-sauce-pasta.jpg" // Ensure this image exists in public/images/
+      description="Savory red sauce pasta with a blend of herbs and spices. Customize your order below!"
+    />
+  );
+};
 
-export default Pasta
+export default RedSaucePastaPage;

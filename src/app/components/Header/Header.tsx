@@ -1,10 +1,14 @@
-"use client"
+// src/app/components/Header/Header.tsx
+"use client";
+
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useCart } from '../../context/CartContext';
 
 const Header: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { cartCount, openCart } = useCart();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -14,12 +18,12 @@ const Header: React.FC = () => {
     <header className="flex items-center justify-between px-8 py-4 bg-white shadow-md fixed w-full z-50">
       {/* Left Section (Logo) */}
       <div>
-      <Link href="https://www.instagram.com/hot.fromtheoven/" target="_blank" rel="noopener noreferrer">
+        <Link href="https://www.instagram.com/hot.fromtheoven/" target="_blank" rel="noopener noreferrer">
           <Image
             src="/insta.jpg" 
             alt="Instagram Logo"
-            width={40} // Set the width of the logo
-            height={40} // Set the height of the logo
+            width={40} 
+            height={40} 
             className="cursor-pointer"
           />
         </Link>
@@ -30,18 +34,20 @@ const Header: React.FC = () => {
         <Link href="/" className="hover:text-orange-500">Home</Link>
         <Link href="/about" className="hover:text-orange-500">About</Link>
         <Link href="/products" className="hover:text-orange-500">Products</Link>
-    <Link href="/shop" className="hover:text-orange-500">Shop</Link>
+        <Link href="/shop" className="hover:text-orange-500">Shop</Link>
         <Link href="/contact" className="hover:text-orange-500">Contact</Link>
         <Link href="/reviews" className="hover:text-orange-500">Reviews</Link>
       </nav>
 
-      {/* Right Section (Reserve Button and Cart Icon) */}
+      {/* Right Section (Cart Icon) */}
       <div className="hidden md:flex items-center space-x-6">
-        <div className="relative">
-          <Image src="/cart-icon.png" alt="Cart" width={24} height={24}  className="cursor-pointer" />
-          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-            2
-          </span>
+        <div className="relative cursor-pointer" onClick={openCart}>
+          <Image src="/cart-icon.png" alt="Cart" width={24} height={24} />
+          {cartCount > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {cartCount}
+            </span>
+          )}
         </div>
       </div>
 
@@ -104,8 +110,6 @@ const Header: React.FC = () => {
           <Link href="/products" className="block text-gray-800 hover:text-orange-500">
             Products
           </Link>
-          
-
           <Link href="/shop" className="block text-gray-800 hover:text-orange-500">
             Shop
           </Link>
@@ -115,7 +119,6 @@ const Header: React.FC = () => {
           <Link href="/reviews" className="block text-gray-800 hover:text-orange-500">
             Reviews
           </Link>
-          
         </nav>
       </div>
 

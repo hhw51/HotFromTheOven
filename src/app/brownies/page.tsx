@@ -1,11 +1,18 @@
-import React from 'react'
+// src/app/brownies/page.tsx
+"use client";
 
-const Brownies = () => {
+import React from "react";
+import ProductForm from "../components/ProductForm";
+
+const BrowniesPage: React.FC = () => {
   return (
-    <div>
-      HEYY
-    </div>
-  )
-}
+    <ProductForm
+      product="Red Sauce Pasta"
+      price={7.50}
+      image="/images/red-sauce-pasta.jpg"
+      description="Savory red sauce pasta with a blend of herbs and spices. Customize your order below!"
+    />
+  );
+};
 
-export default Brownies
+export default BrowniesPage;
