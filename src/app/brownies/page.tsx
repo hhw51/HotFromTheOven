@@ -7,10 +7,10 @@ import ProductForm from "../components/ProductForm";
 const BrowniesPage: React.FC = () => {
   return (
     <ProductForm
-      product="Red Sauce Pasta"
+      product="Brownies"
       price={7.50}
-      image="/images/red-sauce-pasta.jpg"
-      description="Savory red sauce pasta with a blend of herbs and spices. Customize your order below!"
+      image="/brownies.jpg"
+      description="Brownies! Customize your order below!"
     />
   );
 };

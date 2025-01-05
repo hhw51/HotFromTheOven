@@ -7,9 +7,9 @@ import ProductForm from "../components/ProductForm";
 const MacNCheesePage: React.FC = () => {
   return (
     <ProductForm
-      product="Mac & Cheese"
+      product="Alfredo Pasta"
       price={6.50}
-      image="/images/mac-n-cheese.jpg" // Ensure this image exists in public/images/
+      image="/mac.jpg" 
       description="Creamy and cheesy mac & cheese baked to perfection. Customize your order below!"
     />
   );

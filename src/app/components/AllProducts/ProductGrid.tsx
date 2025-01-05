@@ -4,9 +4,9 @@ import ProductCard from "./ProductCard";
 const ProductGrid: React.FC = () => {
   const products = [
     { image: "/lasagna.jpg", name: "Lasagna", price: "1500" },
-    { image: "/brownies.jpg", name: "Brownies", price: "500" },
-    { image: "/mac.jpg", name: "Mac n Cheese", price: "56" },
-    { image: "/pasta.jpg", name: "Red Sauce Pasta", price: "62" },
+    { image: "/brownies.jpg", name: "Brownies", price: "650" },
+    { image: "/mac.jpg", name: "Alfredo Pasta", price: "1500" },
+    { image: "/pasta.jpg", name: "Red Sauce Pasta", price: "1500" },
   ];
 
   return (

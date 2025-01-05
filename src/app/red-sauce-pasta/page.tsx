@@ -9,7 +9,7 @@ const RedSaucePastaPage: React.FC = () => {
     <ProductForm
       product="Red Sauce Pasta"
       price={7.50}
-      image="/images/red-sauce-pasta.jpg" // Ensure this image exists in public/images/
+      image="/pasta.jpg" 
       description="Savory red sauce pasta with a blend of herbs and spices. Customize your order below!"
     />
   );

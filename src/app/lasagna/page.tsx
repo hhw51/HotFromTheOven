@@ -9,7 +9,7 @@ const LasagnaPage: React.FC = () => {
     <ProductForm
       product="Lasagna"
       price={8.00}
-      image="/images/lasagna.jpg" // Ensure this image exists in public/images/
+      image="/lasagna.jpg"
       description="Classic Italian lasagna layered with rich tomato sauce, melted cheese, and perfectly cooked noodles. Customize your order below!"
     />
   );

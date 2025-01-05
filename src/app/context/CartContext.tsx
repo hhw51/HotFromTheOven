@@ -36,31 +36,43 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   useEffect(() => {
     // Load cart from localStorage on mount
-    const savedCart = JSON.parse(localStorage.getItem('cart') || '[]') as CartItem[];
-    setCartItems(savedCart);
+    try {
+      const savedCart = JSON.parse(localStorage.getItem('cart') || '[]') as CartItem[];
+      setCartItems(savedCart);
+    } catch (error) {
+      console.error("Failed to parse cart from localStorage:", error);
+      setCartItems([]);
+    }
   }, []);
 
   useEffect(() => {
     // Update localStorage whenever cartItems change
-    localStorage.setItem('cart', JSON.stringify(cartItems));
+    try {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    } catch (error) {
+      console.error("Failed to set cart in localStorage:", error);
+    }
+
     // Update total amount
     const total = cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0);
     setTotalAmount(total);
+
     // Update cart count
     setCartCount(cartItems.length);
   }, [cartItems]);
 
   const addToCart = (item: CartItem) => {
-    console.log("addToCart called with item:", item);
+    console.log("🥂 addToCart called with item:", item);
     setCartItems((prevItems) => {
       const existingIndex = prevItems.findIndex(
         (prevItem) => prevItem.product === item.product && prevItem.size === item.size
       );
+
       if (existingIndex !== -1) {
         // Update quantity if item exists
         const updatedItems = [...prevItems];
         updatedItems[existingIndex].quantity += item.quantity;
-        console.log(`Updating quantity for existing item: ${item.product}`);
+        console.log(`💀 Updating quantity for existing item: ${item.product}, New Quantity: ${updatedItems[existingIndex].quantity}`);
         return updatedItems;
       } else {
         // Add new item if it doesn't exist
@@ -68,6 +80,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return [...prevItems, item];
       }
     });
+
     toast.success(`${item.product} added to cart!`, {
       position: "top-center",
     });

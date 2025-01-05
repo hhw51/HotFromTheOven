@@ -57,6 +57,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ product, price, image, descri
 
   const handleAddToCart = () => {
     console.log("handleAddToCart called with:", formData); // Debug log
+
+    // Prevent adding if already in the process of adding
+    if (isAdding) {
+      console.log("Add to Cart is already in progress. Aborting.");
+      return;
+    }
+
     setIsAdding(true);
     addToCart(formData);
     setIsAdding(false);
