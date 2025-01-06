@@ -1,10 +1,9 @@
-// src/app/components/Header/Header.tsx
 "use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useCart } from '../../context/CartContext';
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useCart } from "../../context/CartContext";
 
 const Header: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -14,16 +13,40 @@ const Header: React.FC = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
     <header className="flex items-center justify-between px-8 py-4 bg-white shadow-md fixed w-full z-50">
-      {/* Left Section (Logo) */}
+      {/* Left Section */}
       <div>
-        <Link href="https://www.instagram.com/hot.fromtheoven/" target="_blank" rel="noopener noreferrer">
+        {/* Instagram Icon on Desktop */}
+        <Link
+          href="https://www.instagram.com/hot.fromtheoven/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:block"
+        >
           <Image
-            src="/insta.jpg" 
+            src="/insta.jpg"
             alt="Instagram Logo"
-            width={40} 
-            height={40} 
+            width={40}
+            height={40}
+            className="cursor-pointer"
+          />
+        </Link>
+
+        {/* Home Icon on Mobile */}
+        <Link
+          href="/"
+          className="block md:hidden text-gray-800 hover:text-orange-500"
+        >
+          <Image
+            src="/home-icon.png"
+            alt="Home Icon"
+            width={40}
+            height={40}
             className="cursor-pointer"
           />
         </Link>
@@ -31,12 +54,24 @@ const Header: React.FC = () => {
 
       {/* Center Section (Navigation Menu for Desktop) */}
       <nav className="hidden md:flex space-x-6 text-gray-800 font-semibold">
-        <Link href="/" className="hover:text-orange-500">Home</Link>
-        <Link href="/about" className="hover:text-orange-500">About</Link>
-        <Link href="/products" className="hover:text-orange-500">Products</Link>
-        <Link href="/menu" className="hover:text-orange-500">Menu</Link>
-        <Link href="/contact" className="hover:text-orange-500">Contact</Link>
-        <Link href="/reviews" className="hover:text-orange-500">Reviews</Link>
+        <Link href="/" className="hover:text-orange-500">
+          Home
+        </Link>
+        <Link href="/about" className="hover:text-orange-500">
+          About
+        </Link>
+        <Link href="/products" className="hover:text-orange-500">
+          Products
+        </Link>
+        <Link href="/menu" className="hover:text-orange-500">
+          Menu
+        </Link>
+        <Link href="/contact" className="hover:text-orange-500">
+          Contact
+        </Link>
+        <Link href="/reviews" className="hover:text-orange-500">
+          Reviews
+        </Link>
       </nav>
 
       {/* Right Section (Cart Icon) */}
@@ -75,7 +110,7 @@ const Header: React.FC = () => {
       {/* Sidebar Overlay */}
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform ${
-          isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
+          isSidebarOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 ease-in-out z-50`}
       >
         {/* Close Button */}
@@ -101,19 +136,39 @@ const Header: React.FC = () => {
 
         {/* Sidebar Menu */}
         <nav className="mt-16 space-y-4 px-6">
-          <Link href="/" className="block text-gray-800 hover:text-orange-500">
+          <Link
+            href="/"
+            className="block text-gray-800 hover:text-orange-500"
+            onClick={closeSidebar} // Close sidebar on click
+          >
             Home
           </Link>
-          <Link href="/about" className="block text-gray-800 hover:text-orange-500">
+          <Link
+            href="/about"
+            className="block text-gray-800 hover:text-orange-500"
+            onClick={closeSidebar} // Close sidebar on click
+          >
             About
           </Link>
-          <Link href="/menu" className="block text-gray-800 hover:text-orange-500">
+          <Link
+            href="/menu"
+            className="block text-gray-800 hover:text-orange-500"
+            onClick={closeSidebar} // Close sidebar on click
+          >
             Menu
           </Link>
-          <Link href="/contact" className="block text-gray-800 hover:text-orange-500">
+          <Link
+            href="/contact"
+            className="block text-gray-800 hover:text-orange-500"
+            onClick={closeSidebar} // Close sidebar on click
+          >
             Contact
           </Link>
-          <Link href="/reviews" className="block text-gray-800 hover:text-orange-500">
+          <Link
+            href="/reviews"
+            className="block text-gray-800 hover:text-orange-500"
+            onClick={closeSidebar} // Close sidebar on click
+          >
             Reviews
           </Link>
         </nav>
