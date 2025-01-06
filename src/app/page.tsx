@@ -10,7 +10,6 @@ export default function Home() {
       <div className="mx-auto max-w-screen-xl px-6 lg:px-12">
         <SectionTitle />
         <ProductGrid />
-        {/* <CatalogButton /> */}
       </div>
     </div>
   );
