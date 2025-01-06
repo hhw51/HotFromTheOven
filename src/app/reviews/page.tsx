@@ -22,6 +22,7 @@ const ReviewsPage: React.FC = () => {
   const [message, setMessage] = useState<string | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loadingReviews, setLoadingReviews] = useState(true);
+  // const [loadingReviewss, setLoadingReviesws] = useState(true);
 
   // Fetch visible reviews on component mount
   useEffect(() => {
