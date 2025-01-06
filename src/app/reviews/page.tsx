@@ -134,7 +134,7 @@ const ReviewsPage: React.FC = () => {
               <option value={3}>3 - Below Average</option>
               <option value={2.5}>2.5 - Poor</option>
               <option value={2}>2 - Very Poor</option>
-              <option value={1.5}>1.5 - Terrible</option>
+              <option value={1.5}>1.5 - Terriblee</option>
               <option value={1}>1 - Awful</option>
             </select>
           </div>
