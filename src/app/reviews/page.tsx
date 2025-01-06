@@ -244,8 +244,9 @@ const ReviewsPage: React.FC = () => {
           </div>
         )}
       </div>
-    </div>
+      </div>
   );
 };
+
 
 export default ReviewsPage;
