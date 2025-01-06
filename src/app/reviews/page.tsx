@@ -22,7 +22,6 @@ const ReviewsPage: React.FC = () => {
   const [message, setMessage] = useState<string | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loadingReviews, setLoadingReviews] = useState(true);
-  // const [loadingReviewss, setLoadingReviesws] = useState(true);
 
   // Fetch visible reviews on component mount
   useEffect(() => {
@@ -32,10 +31,10 @@ const ReviewsPage: React.FC = () => {
   const fetchReviews = async () => {
     setLoadingReviews(true);
     const { data, error } = await supabase
-    .from("reviews")
-    .select("*")
-    .eq("visibility", "y")
-    .order("created_at", { ascending: false });
+      .from("reviews")
+      .select("*")
+      .eq("visibility", "y")
+      .order("created_at", { ascending: false });
 
     if (error) {
       console.error("Error fetching reviews:", error);
@@ -62,7 +61,7 @@ const ReviewsPage: React.FC = () => {
     setIsSubmitting(true);
     setMessage(null);
 
-    const { error } = await supabase.from("reviews").insert([
+    const { error } = await supabase.from("reviews").insert([ 
       {
         content: reviewContent,
         visibility: "n", // Default to 'n' as per your requirement
@@ -78,12 +77,17 @@ const ReviewsPage: React.FC = () => {
       setReviewContent("");
       setReviewerName("");
       setStars(5);
-      setMessage(
-        "Your review has been posted and will be up soon. Thank you for your response!"
-      );
+      setMessage("Your review has been posted and will be up soon. Thank you for your response!");
     }
 
     setIsSubmitting(false);
+  };
+
+  // Generate avatar based on the reviewer's name (initials)
+  const generateAvatar = (name: string) => {
+    const nameParts = name.split(" ");
+    const initials = nameParts.map((part) => part[0]).join("");
+    return `https://ui-avatars.com/api/?name=${initials}&background=random&color=fff&size=128`;
   };
 
   return (
@@ -135,7 +139,7 @@ const ReviewsPage: React.FC = () => {
               <option value={3}>3 - Below Average</option>
               <option value={2.5}>2.5 - Poor</option>
               <option value={2}>2 - Very Poor</option>
-              <option value={1.5}>1.5 - Terriblee</option>
+              <option value={1.5}>1.5 - Terrible</option>
               <option value={1}>1 - Awful</option>
             </select>
           </div>
@@ -178,7 +182,7 @@ const ReviewsPage: React.FC = () => {
                 {/* User Avatar */}
                 <div className="mr-4 flex-shrink-0">
                   <Image
-                    src="/avatar.png" // Replace with your avatar image or a default avatar
+                    src={generateAvatar(review.added_by)} // Generate avatar based on name
                     alt="User Avatar"
                     width={50}
                     height={50}
@@ -245,9 +249,8 @@ const ReviewsPage: React.FC = () => {
           </div>
         )}
       </div>
-      </div>
+    </div>
   );
 };
-
 
 export default ReviewsPage;

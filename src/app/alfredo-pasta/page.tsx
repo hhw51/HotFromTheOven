@@ -1,18 +1,22 @@
-// src/app/mac-n-cheese/page.tsx
 "use client";
 
 import React from "react";
 import ProductForm from "../components/ProductForm";
 
-const MacNCheesePage: React.FC = () => {
+const LasagnaPage: React.FC = () => {
   return (
     <ProductForm
-      product="Alfredo Pasta"
-      price={6.50}
-      image="/mac.jpg" 
-      description="Creamy and cheesy mac & cheese baked to perfection. Customize your order below!"
+      product="Red Sauce Pasta"
+      price={1500} // Base price
+      image="/pasta.jpg"
+      description="Classic Italian lasagna layered with rich tomato sauce, melted cheese, and perfectly cooked noodles. Customize your order below!"
+      options={[
+        { size: "Just for you", price: 1500 },
+        { size: "Two for the table", price: 2750 },
+        { size: "Four’s a party", price: 5500 },
+      ]}
     />
   );
 };
 
-export default MacNCheesePage;
+export default LasagnaPage;

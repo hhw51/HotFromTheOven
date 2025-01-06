@@ -56,7 +56,7 @@ const CartModal: React.FC = () => {
             </ul>
             <div className="flex justify-between items-center mb-4">
               <span className="font-bold">Total:</span>
-              <span className="font-bold">PKR. {totalAmount.toFixed(2)}</span>
+              <span className="font-bold">PKR. {totalAmount}</span>
             </div>
             <div className="flex justify-end">
               <Link href="/cart">

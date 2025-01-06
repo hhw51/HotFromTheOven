@@ -1,18 +1,22 @@
-// src/app/red-sauce-pasta/page.tsx
 "use client";
 
 import React from "react";
 import ProductForm from "../components/ProductForm";
 
-const RedSaucePastaPage: React.FC = () => {
+const LasagnaPage: React.FC = () => {
   return (
     <ProductForm
       product="Red Sauce Pasta"
-      price={7.50}
-      image="/pasta.jpg" 
-      description="Savory red sauce pasta with a blend of herbs and spices. Customize your order below!"
+      price={1500} // Base price
+      image="/pasta.jpg"
+      description="Classic Italian lasagna layered with rich tomato sauce, melted cheese, and perfectly cooked noodles. Customize your order below!"
+      options={[
+        { size: "Just for you", price: 1500 },
+        { size: "Two for the table", price: 2750 },
+        { size: "Four’s a party", price: 5500 },
+      ]}
     />
   );
 };
 
-export default RedSaucePastaPage;
+export default LasagnaPage;

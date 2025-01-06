@@ -1,4 +1,3 @@
-// src/app/lasagna/page.tsx
 "use client";
 
 import React from "react";
@@ -8,9 +7,14 @@ const LasagnaPage: React.FC = () => {
   return (
     <ProductForm
       product="Lasagna"
-      price={8.00}
+      price={1500} // Base price
       image="/lasagna.jpg"
       description="Classic Italian lasagna layered with rich tomato sauce, melted cheese, and perfectly cooked noodles. Customize your order below!"
+      options={[
+        { size: "Just for you", price: 1500 },
+        { size: "Two for the table", price: 2750 },
+        { size: "Four’s a party", price: 5500 },
+      ]}
     />
   );
 };
