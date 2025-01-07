@@ -10,12 +10,14 @@ type ProductFormProps = {
   image: string;
   description: string;
   options: { size: string; price: number }[]; // Add options for size and price
+  flavors?: { name: string; price: number }[]; // Add optional flavors for brownies
 };
 
 type FormData = {
   product: string;
   quantity: number | string;  // Allow quantity to be a string to handle empty input
   size: string;
+  flavor?: string; // Optional flavor field
   price: number;
   image: string;
 };
@@ -26,6 +28,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
   image,
   description,
   options,
+  flavors,
 }) => {
   const { addToCart } = useCart();
 
@@ -33,6 +36,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
     product,
     quantity: 1,
     size: options[0]?.size || "Just for you", // Default to the first option
+    flavor: flavors ? flavors[0]?.name : undefined, // Default flavor for brownies
     price: options[0]?.price || price,
     image,
   });
@@ -52,10 +56,17 @@ const ProductForm: React.FC<ProductFormProps> = ({
     }
   };
 
+  const handleFlavorChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedFlavor = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      flavor: selectedFlavor,
+    }));
+  };
+
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    // If the input is empty, let it stay empty
     if (value === "") {
       setFormData((prev) => ({
         ...prev,
@@ -64,10 +75,8 @@ const ProductForm: React.FC<ProductFormProps> = ({
       return;
     }
 
-    // Ensure the value is a valid integer, and if so, set the quantity
     const quantity = /^\d+$/.test(value) ? parseInt(value, 10) : 1;
 
-    // Update state with the new quantity, ensuring it's at least 1
     setFormData((prev) => ({
       ...prev,
       quantity: Math.max(quantity, 1),
@@ -77,24 +86,19 @@ const ProductForm: React.FC<ProductFormProps> = ({
   const handleAddToCart = () => {
     if (isAdding) return;
   
-    // Ensure quantity is a number (fallback to 1 if invalid)
     const quantity = typeof formData.quantity === "string" ? parseInt(formData.quantity, 10) : formData.quantity;
   
-    // If the quantity is NaN or less than 1, set it to 1
     const validQuantity = isNaN(quantity) || quantity < 1 ? 1 : quantity;
   
-    // Update formData with the valid quantity
     setFormData((prev) => ({
       ...prev,
       quantity: validQuantity,
     }));
   
-    // Now call addToCart with the valid quantity
     setIsAdding(true);
     addToCart({ ...formData, quantity: validQuantity });
     setIsAdding(false);
   };
-  
 
   return (
     <div className="max-w-screen-lg mx-auto p-6">
@@ -123,13 +127,35 @@ const ProductForm: React.FC<ProductFormProps> = ({
             </select>
           </div>
 
+          {/* Flavor Selection (Only for Brownies) */}
+          {flavors && (
+            <div>
+              <label htmlFor="flavor" className="block font-semibold mb-2">
+                Choose Flavor
+              </label>
+              <select
+                id="flavor"
+                name="flavor"
+                value={formData.flavor}
+                onChange={handleFlavorChange}
+                className="border border-gray-300 rounded-lg p-2 w-full"
+              >
+                {flavors.map((flavor) => (
+                  <option key={flavor.name} value={flavor.name}>
+                    {flavor.name} - PKR. {flavor.price}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
           {/* Quantity Input */}
           <div>
             <label htmlFor="quantity" className="block font-semibold mb-2">
               Quantity
             </label>
             <input
-              type="text" // Keep the input type as text
+              type="text" 
               id="quantity"
               name="quantity"
               value={formData.quantity}

@@ -30,8 +30,9 @@ const CartModal: React.FC = () => {
                       <Image src={item.image} alt={item.product} width={40} height={40} className="rounded" />
                     )}
                     <div>
-                      <p className="font-semibold">{item.product} - {item.size}</p>
-                      {item.specialInstructions && (
+                    <p className="text-lg font-semibold">
+        {item.productName || `${item.product} - ${item.size}`}
+      </p>                      {item.specialInstructions && (
                         <p className="text-sm text-gray-600">Note: {item.specialInstructions}</p>
                       )}
                     </div>

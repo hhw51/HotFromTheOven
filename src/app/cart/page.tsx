@@ -6,6 +6,7 @@ import { AiOutlineCopy } from "react-icons/ai"; // Import the new copy icon
 
 // Define a type for the cart item
 type CartItem = {
+  productName: string;
   product: string;
   size: string;
   quantity: number;
@@ -131,18 +132,34 @@ const CartPage: React.FC = () => {
       ) : (
         <ul className="space-y-4">
           {cartItems.map((item, index) => (
-            <li key={index} className="flex justify-between items-center p-4 border rounded-lg shadow-sm hover:shadow-lg transition-shadow">
-              <div className="flex-shrink-0 mr-4">
-                <img src={item.imageUrl} alt={item.product} className="w-20 h-20 object-cover rounded-lg" />
-              </div>
-              <div className="flex flex-col flex-grow">
-                <p className="text-lg font-semibold">{item.product} - {item.size}</p>
-                <p className="text-gray-600">Quantity: {item.quantity}</p>
-                <p className="text-gray-700 font-medium">PKR. {(item.price * item.quantity).toFixed(2)}</p>
-              </div>
-              <button className="text-red-600 hover:text-red-800 font-semibold" onClick={() => handleRemove(index)}>Remove</button>
-            </li>
-          ))}
+  <li 
+    key={index} 
+    className="flex justify-between items-center p-4 border rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+  >
+    <div className="flex-shrink-0 mr-4">
+      <img 
+        src={item.imageUrl} 
+        alt={item.product} 
+        className="w-20 h-20 object-cover rounded-lg" 
+      />
+    </div>
+    <div className="flex flex-col flex-grow">
+      {/* Conditional rendering for product name */}
+      <p className="text-lg font-semibold">
+        {item.productName || `${item.product} - ${item.size}`}
+      </p>
+      <p className="text-gray-600">Quantity: {item.quantity}</p>
+      <p className="text-gray-700 font-medium">PKR. {(item.price * item.quantity).toFixed(2)}</p>
+    </div>
+    <button 
+      className="text-red-600 hover:text-red-800 font-semibold" 
+      onClick={() => handleRemove(index)}
+    >
+      Remove
+    </button>
+  </li>
+))}
+
         </ul>
       )}
 

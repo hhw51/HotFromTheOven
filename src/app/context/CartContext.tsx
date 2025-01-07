@@ -11,6 +11,7 @@ type CartItem = {
   price: number;
   specialInstructions?: string;
   image?: string;
+  productName?: string;
 };
 
 type CartContextType = {
